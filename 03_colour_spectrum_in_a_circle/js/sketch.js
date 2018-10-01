@@ -26,9 +26,9 @@ function draw() {
 
   background(0, 0, width);
 
-  var numberOfSteps = map(constrain(mouseY, 0, height), 0, height, 5, 360);
+  var numberOfSteps = floor(map(constrain(mouseY, 0, height), 0, height, 5, 360));
   var angleIncrement = 360 / numberOfSteps;
-  var radius = map(mouseX, 0, width, 10, 500);
+  var radius = map(mouseX, 0, width, 250, 400);
 
   beginShape(TRIANGLE_FAN);
   vertex(width / 2, height / 2);
@@ -39,24 +39,8 @@ function draw() {
     fill(angle, height, width);
   }
   endShape();
+}
 
-  beginShape(TRIANGLE_FAN);
-  vertex(width / 4, height / 2);
-  for (var angle = 0; angle <= 360; angle += angleIncrement) {
-    var vx = radius * cos(radians(angle)) + width / 4;
-    var vy = radius * sin(radians(angle)) + height / 2;
-    vertex(vx, vy);
-    fill(angle, height, width);
-  }
-  endShape();
-
-  beginShape(TRIANGLE_FAN);
-  vertex(width / 1.33, height / 2);
-  for (var angle = 0; angle <= 360; angle += angleIncrement) {
-    var vx = radius * cos(radians(angle)) + width / 1.33;
-    var vy = radius * sin(radians(angle)) + height / 2;
-    vertex(vx, vy);
-    fill(angle, height, width);
-  }
-  endShape();
+function keyPressed() {
+  if (key == 's' || key == 'S') saveCanvas(canvas, gd.timestamp() + '_MouseX_' + mouseX + '_MouseY_' + mouseY, 'png');
 }
