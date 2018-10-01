@@ -1,3 +1,3 @@
 ## Generative Design
 
-![](sample_images/comp_col1.png | width=100)
+<img src="sample_images/comp_col1.png" alt="alt text" width="100">
