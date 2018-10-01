@@ -24,8 +24,8 @@ function setup() {
 // The 'draw' function is called in a loop. Everything that is in the function is executed continuously
 function draw() {
 
-  numberOfCols = mouseX;
-  numberOfRows = mouseY;
+  numberOfCols = floor(map(constrain(mouseX, 0, width), 0, width, 2, 100));
+  numberOfRows = floor(map(constrain(mouseY, 0, height), 0, width, 2, 200));
 
   var stepX = width / numberOfCols;
   var stepY = height / numberOfRows;
