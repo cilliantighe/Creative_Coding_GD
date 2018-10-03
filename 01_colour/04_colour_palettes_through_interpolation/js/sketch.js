@@ -70,8 +70,8 @@ function draw() {
 
 function shakeColour() {
   for (var i = 0; i < tileY; i++) {
-    coloursLeft[i] = color(floor(random(0, 125)), floor(random(0, 125)), 255);
-    coloursRight[i] = color(floor(random(130, 255)), floor(random(130, 255)), 125);
+    coloursLeft[i] = color(floor(random(0, 100)), floor(random(0, 125)), 255);
+    coloursRight[i] = color(floor(random(175, 255)), floor(random(130, 255)), 125);
   }
 }
 
