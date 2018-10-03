@@ -2,7 +2,7 @@
 
 ### [Complementary Colours](01_complementary_colours/)
 
-<img src="sample_images/comp_col1.png" alt="alt text" width="150" style="float: left;"> <img src="sample_images/comp_col2.png" alt="alt text" width="150" style="float: left;"> <img src="sample_images/comp_col3.png" alt="alt text" width="150" style="float: left;"> <img src="sample_images/comp_col4.png" alt="alt text" width="150" style="float: left;">
+<img src="sample_images/comp_col1.png" alt="alt text" width="150" style="float: left;">     <img src="sample_images/comp_col2.png" alt="alt text" width="150" style="float: left;"><img src="sample_images/comp_col3.png" alt="alt text" width="150" style="float: left;"><img src="sample_images/comp_col4.png" alt="alt text" width="150" style="float: left;">
 
 ### [Colour Spectrum in a Grid](02_colour_spectrum_in_a_grid/)
 
