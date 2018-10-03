@@ -20,4 +20,4 @@
 
 <img src="sample_images/image_col1.png" alt="alt text" width="150" style="float: left;"><img src="sample_images/image_col2.png" alt="alt text" width="150" style="float: left;"><img src="sample_images/image_col3.png" alt="alt text" width="150" style="float: left;"><img src="sample_images/image_col4.png" alt="alt text" width="150" style="float: left;">
 
-[<---](../)
+[<---](../Creative_Coding_GD)
