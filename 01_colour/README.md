@@ -1,6 +1,6 @@
 ## Generative Design
 
-### Complementary Colours
+### [Colour](01_colour/)
 
 <img src="sample_images/comp_col1.png" alt="alt text" width="150" style="float: left;"><img src="sample_images/comp_col2.png" alt="alt text" width="150" style="float: left;"><img src="sample_images/comp_col3.png" alt="alt text" width="150" style="float: left;"><img src="sample_images/comp_col4.png" alt="alt text" width="150" style="float: left;">
 
