@@ -1,4 +1,4 @@
-## The Nature of Code - P5
+## Generative Design - P5
 
 An online repository of topics completed in Generative Design
 
