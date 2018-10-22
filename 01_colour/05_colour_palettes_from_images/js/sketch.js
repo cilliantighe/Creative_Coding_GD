@@ -33,7 +33,6 @@ function preload() {
 
 }
 
-
 // The 'setup' function is only called once. Everything within the function is executed once
 function setup() {
 
@@ -48,7 +47,10 @@ function setup() {
 // The 'draw' function is called in a loop. Everything that is in the function is executed continuously
 function draw() {
 
-  var tileCount = map(constrain(mouseX, 0, width), 0, width, 5, 500);
+  // Time passed will hold the amount of time passed in seconds
+  timePassed = millis() / 1000;
+
+  var tileCount = map(constrain(mouseX, 0, width), 0, width, 5, 250);
 
   var rectSize = width / tileCount;
 
@@ -78,10 +80,6 @@ function draw() {
     }
   }
 
-  // Time passed will hold the amount of time passed in seconds
-  timePassed = millis() / 1000;
-
-
   //---------------------------------------------------------
   // ---------- FUNCTION FOR DISPLAYING INTRO TEXT ----------
   //---------------------------------------------------------
@@ -92,17 +90,17 @@ function draw() {
     textFont(headerFont);
     textAlign(CENTER);
     fill(0, 0, 100, textAlpha);
-    text('Generative Design: Colour', width / 2, height / 2.3);
+    text('Generative Design: Colour', width / 2, height / 2.1);
 
     // The rectangle below will act as a divider between the two text fields
     rectMode(CENTER);
-    rect(width / 2, height / 2.2, dividerWidth, 3);
+    rect(width / 2, height / 2, dividerWidth, 3);
     rectMode(CORNER);
 
     // Changing the font size, type for the font below
     textSize(40);
     textFont(descFont);
-    text('Colour Palettes From Images', width / 2, height / 2);
+    text('Colour Palettes From Images', width / 2, height / 1.8);
 
 
     // The condition below checks to see if the desired display time for the text
