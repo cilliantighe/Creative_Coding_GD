@@ -39,5 +39,5 @@ Follow the link below to see the sketch in action
 
 [Demo](https://cilliantighe.github.io/Creative_Coding_GD/01_colour/01_complementary_colours/)
 
-Go back
+Return to colour section
 [&lt;---](https://github.com/cilliantighe/Creative_Coding_GD/tree/master/01_colour)
