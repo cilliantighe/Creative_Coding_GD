@@ -9,14 +9,14 @@ colorMode(HSB, width, height, 100);
 
 ### contrain()
 mousex and mouseY are key words in P5.js. They output the x and y location of the mouse in relation to the canvas. 
-In order to make sure that the output of the mouseX and mouseY is controlled, they are both constrained using the constrain() function.
+In order to make sure that the output of the mouseX and mouseY are controlled, they are both constrained using the constrain() function.
 
 ```javascript
 constrain(mouseY, 0, width);
 ```
 
 ### map()
-In this sketch, the map() function is used to output a desired number in a range. The map() function in this sketch is used on the mouseX and mouseY to output values from 10 - 100. These values are then stored in variables called tileCountX and tileCountY. These variables are used to determine the amount of rectangles that are drawn on the canvas.
+In this sketch, the map() function is used to output a number from a range. The map() function in this sketch is used on the mouseX and mouseY to output values from 10 - 100. These values are then stored in variables called tileCountX and tileCountY. These variables are used to determine the amount of rectangles that are drawn on the canvas.
 
 ```javascript
 map(mouseY, 0, width, 10, 100);
