@@ -1,4 +1,5 @@
-## Generative Design
+## Generative Design: Colour
+In this section of the repository
 
 ### [Complementary Colours](01_complementary_colours/)
 
@@ -22,6 +23,6 @@
 
 ### [Colour Palettes from Rules](06_colour_palettes_from_rules/)
 
-<img src="sample_images/06_palette_rule1.png" width="150" style="float: left;"><img src="sample_images/06_palette_rule2.png" width="150" style="float: left;"><img src="sample_images/06_palette_rule3.png" width="150" style="float: left;"><img src="sample_images/06_palette_rule4.png" width="150">
+<img src="sample_images/06_palette_rule1.png" width="150" style="float: left;"><img src="sample_images/06_palette_rule2.png" width="150" style="float: left;"><img src="sample_images/06_palette_rule3.png" width="150" style="float: left;"><img src="sample_images/06_palette_rule4.png" width="150"><img src="sample_images/06_palette_rule5.png" width="150">
 
 [&lt;---](https://github.com/cilliantighe/Creative_Coding_GD)
