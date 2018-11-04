@@ -23,17 +23,20 @@ map(mouseY, 0, width, 10, 100);
 ```
 
 ### for loop
-In order to populate the canvas, a nested for loop is needed. One to handle the y direction and one for the x direction. The amount of rectangles to be drawn is determined by the position of the mouse. 
+In order to populate the canvas, a nested for loop is needed. One to handle the y direction and one for the x direction. The amount of rectangles to be drawn is determined by the position of the mouse. The height and width of each rectangle is calculated by dividing the amount of rectangles by the width and height (var tileHeight = height / tileCountY, var tileWidth = width / tileCountX).
 
 ```javascript
-background(yPos, 100, 100);
+for (var gridY = 0; gridY < height; gridY += tileHeight) {
+    for (var gridX = 0; gridX < width; gridX += tileWidth) {
+    }
+  }
 ```
 
 ### fill()
-The fill() function is used to colour elements. It should be called before the element that is to be coloured. '360 - yPos' is passed in this function to display the inverse of the colour that's being displayed on the background.
+The fill() function is used to colour elements. It should be called before the element that is to be coloured. 
 
 ```javascript
-fill(360-yPos, 100, 100);
+
 ```
 Follow the link below to see the sketch in action
 
