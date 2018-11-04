@@ -23,7 +23,7 @@ map(mouseY, 0, width, 10, 100);
 ```
 
 ### for loop
-In order to populate the canvas, a nested for loop is needed. The first loop handles the y direction and the second loop handles the x direction. The amount of rectangles to be drawn is determined by the position of the mouse. The height and width of each rectangle is calculated by dividing the amount of rectangles by the width and height (var tileHeight = height / tileCountY, var tileWidth = width / tileCountX).
+In order to populate the canvas, a nested for loop is needed. The first loop handles the y direction and the second loop handles the x direction. The amount of rectangles to be drawn is determined by the position of the mouse. The height and width of each rectangle is calculated by dividing the amount of rectangles by the width and height of the canvas (var tileHeight = height / tileCountY, var tileWidth = width / tileCountX).
 
 ```javascript
 for (var gridY = 0; gridY < height; gridY += tileHeight) {
