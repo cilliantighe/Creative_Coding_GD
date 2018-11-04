@@ -33,10 +33,12 @@ for (var gridY = 0; gridY < height; gridY += tileHeight) {
 ```
 
 ### fill()
-The fill() function is used to colour elements. It should be called before the element that is to be coloured. 
+The fill() function is used to colour elements. It should be called before the element that is to be coloured. The hue value is calculated by subtracting the current position of gridY from the height of the canvas. This is done to have the colours at the top of the canvas highly saturated.
 
 ```javascript
+fill(gridX, height - gridY, 100);
 
+rect(gridX, gridY, tileWidth, tileHeight);
 ```
 Follow the link below to see the sketch in action
 
