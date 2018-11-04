@@ -23,7 +23,7 @@ map(mouseY, 0, width, 10, 100);
 ```
 
 ### for loop
-In order to populate the canvas, a nested for loop is needed. One to handle the y direction and one for the x direction. The amount of rectangles to be drawn is determined by the position of the mouse. The height and width of each rectangle is calculated by dividing the amount of rectangles by the width and height (var tileHeight = height / tileCountY, var tileWidth = width / tileCountX).
+In order to populate the canvas, a nested for loop is needed. The first loop handles the y direction and the second loop handles the x direction. The amount of rectangles to be drawn is determined by the position of the mouse. The height and width of each rectangle is calculated by dividing the amount of rectangles by the width and height (var tileHeight = height / tileCountY, var tileWidth = width / tileCountX).
 
 ```javascript
 for (var gridY = 0; gridY < height; gridY += tileHeight) {
@@ -33,7 +33,7 @@ for (var gridY = 0; gridY < height; gridY += tileHeight) {
 ```
 
 ### fill()
-The fill() function is used to colour elements. It should be called before the element that is to be coloured. The hue value is calculated by subtracting the current position of gridY from the height of the canvas. This is done to have the colours at the top of the canvas highly saturated.
+The fill() function is used to colour elements. It should be called before the element that is to be coloured. The saturation value is calculated by subtracting the current position of gridY from the height of the canvas. This is done to have the colours at the top of the canvas highly saturated.
 
 ```javascript
 fill(gridX, height - gridY, 100);
