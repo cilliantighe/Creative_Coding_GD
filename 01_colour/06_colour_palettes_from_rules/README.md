@@ -8,3 +8,5 @@ This section is divided into 5 different sketches. Each sketch covers a differen
 3. [Shape Gradient](06_03_shape_gradient/)
 4. [Shape Pattern](06_04_shape_pattern/)
 5. [Shape Combination](06_05_shape_combination/)
+
+[&lt;---](https://github.com/cilliantighe/Creative_Coding_GD/tree/master/01_colour)
