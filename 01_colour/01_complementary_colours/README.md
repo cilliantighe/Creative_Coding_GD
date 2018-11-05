@@ -1,14 +1,14 @@
 ## Complementary Colours
 
 ### colorMode()
-In this sketch, the HSB (Hue, Saturation, Brightness) colour scale is used. HSB allows more control over the desired colour. 
+In this sketch, the HSB (Hue, Saturation, Brightness) colour scale is used. HSB allows more control over the desired colour.
 
 ```javascript
 colorMode(HSB, 360, 100, 100);
 ```
 
 ### contrain()
-mousex and mouseY are key words in P5.js. They output the x and y location of the mouse in relation to the canvas. 
+mousex and mouseY are key words in P5.js. They output the x and y location of the mouse in relation to the canvas.
 In order to make sure that the output of the mouseX and mouseY are controlled, they are both constrained using the constrain() function.
 
 ```javascript
@@ -35,9 +35,7 @@ The fill() function is used to colour elements. It should be called before the e
 ```javascript
 fill(360-yPos, 100, 100);
 ```
-Follow the link below to see the sketch in action
-
+Click here for --->
 [Demo](https://cilliantighe.github.io/Creative_Coding_GD/01_colour/01_complementary_colours/)
 
-Return to colour section
-[&lt;---](https://github.com/cilliantighe/Creative_Coding_GD/tree/master/01_colour)
+[&lt;---](https://github.com/cilliantighe/Creative_Coding_GD/tree/master/01_colour) Return to colour section
