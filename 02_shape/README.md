@@ -1,4 +1,4 @@
-01_translations_4## Generative Design: Colour
+## Generative Design: Shape
 In this section of the repository
 
 ### [Translations](01_translations/)
