@@ -20,9 +20,11 @@ var headerFont = "";
 var descFont = "";
 
 var shape = 'Rectangle';
-var noOfShapes = 10;
-var shapeWidth = 0;
-var shapeHeight = 0;
+var randomAngle = 45;
+var noOfShapesX = 0;
+var noOfShapesY = 0;
+var shapeSize = 100;
+var seedNum = 0;
 
 function preload() {
   // Loading the desired fonts for the project
@@ -34,13 +36,27 @@ function preload() {
 function setup() {
   // Creates the canvas for the animation to be displayed on
   var canvas = createCanvas(windowWidth, windowHeight);
-  shapeWidth = width / noOfShapes;
-  shapeHeight = height / noOfShapes;
+
+  /*
+   The number of shapes in the x and y direction of the canvas is calculated
+   based off the desired shape size that is declared above. The number is floored
+   to have an even number of shapes that are to be drawn
+  */
+  noOfShapesY = floor(height / shapeSize);
+  noOfShapesX = floor(width / shapeSize);
+
+  /*
+  The offset is used to to recentre the canvas based off the remaining pixels that
+  were not used for creating shapes
+  */
+  yOffset = (height - (noOfShapesY * shapeSize)) / 2;
+  xOffset = (width - (noOfShapesX * shapeSize)) / 2;
 
   // Setting the colour mode of the canvas
   // Using the 'rectMode' function to draw rectangles from the center
   colorMode(HSB, 360, 100, 100);
   rectMode(CENTER);
+  noStroke();
 }
 
 // The 'draw' function is called in a loop. Everything that is in the function is executed continuously
@@ -48,21 +64,36 @@ function draw() {
   // Time passed will hold the amount of time passed in seconds
   timePassed = millis() / 1000;
   background(0, 0, 100);
+  randomSeed(seedNum);
 
-  for (var y = 0; y <= noOfShapes; y++) {
-    for (var x = 0; x <= noOfShapes; x++) {
+  // Recentring the canvas using the offset values
+  translate(xOffset, yOffset);
+
+  // Nested loop to position the shapes in the x y direction
+  for (var posY = 0; posY < noOfShapesY; posY++) {
+    for (var posX = 0; posX < noOfShapesX; posX++) {
       push();
-      translate(x * shapeWidth + (shapeWidth / 2), y * shapeHeight + (shapeHeight / 2));
-      rotate(1);
-      fill(0, 0, 0);
-      strokeWeight(2);
-      stroke(0, 0, 100);
+      // Each shape is translated to the centre of their grid
+      translate((posX * shapeSize) + shapeSize / 2, (posY * shapeSize) + shapeSize / 2);
+      rotate(radians(randomAngle));
+      noStroke();
+      var randOp_1 = random(0, 1);
+      var randOp_2 = random(0, 1);
+      fill(195, 70, 98, randOp_1);
+
+      // Conditional statement for displaying the appropriate shape
       if (shape === 'Rectangle') {
-        rect(0, 0, shapeWidth, shapeHeight);
+        rect(0, 0, shapeSize, shapeSize);
+        fill(223, 56, 40, randOp_2)
+        rect(0, 0, shapeSize / 2, shapeSize / 2);
       } else if (shape === 'Ellipse') {
-        ellipse(0, 0, shapeWidth, shapeHeight);
-      }else if (shape === 'Line') {
-        line(0, 0, shapeWidth, shapeHeight);
+        ellipse(0, 0, shapeSize);
+        fill(223, 56, 40, randOp_2)
+        ellipse(0, 0, shapeSize / 2);
+      } else if (shape === 'Triangle') {
+        triangle(-shapeSize / 2, shapeSize / 2, 0, -shapeSize / 2, shapeSize / 2, shapeSize / 2);
+        fill(223, 56, 40, randOp_2);
+        triangle(shapeSize / 2, -shapeSize / 2, 0, shapeSize / 2, -shapeSize / 2, -shapeSize / 2);
       }
       pop();
     }
@@ -75,11 +106,10 @@ function draw() {
     textSize(60);
     textFont(headerFont);
     textAlign(CENTER);
-    fill(0, 0, 100, textAlpha);
+    fill(0, 0, 0, textAlpha);
     text("Generative Design: Shape", width / 2, height / 2.1);
 
     // The rectangle below will act as a divider between the two text fields
-    noStroke();
     rect(width / 2, height / 2, dividerWidth, 3);
 
     // Changing the font size, type for the font below
@@ -99,9 +129,14 @@ function draw() {
     textSize(20);
     textFont(headerFont);
     textAlign(LEFT);
-    fill(0, 0, 100);
+    fill(0, 0, 0);
     text("02_nested_shapes", 25, 30);
   }
+}
+
+function mousePressed() {
+  seedNum = floor(random(0, 1000));
+  randomAngle = floor(random(0, 360));
 }
 
 // Using the built-in function 'keyPressed' to check whether the user presses a key
@@ -110,5 +145,5 @@ function keyPressed() {
   if (key == "s" || key == "S") saveCanvas(canvas, "02_nested_shapes", "png");
   if (key == 1) shape = 'Rectangle';
   if (key == 2) shape = 'Ellipse';
-  if (key == 3) shape = 'Line';
+  if (key == 3) shape = 'Triangle';
 }

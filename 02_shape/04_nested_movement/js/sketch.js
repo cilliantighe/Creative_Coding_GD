@@ -19,12 +19,10 @@ var textAlpha = 1;
 var headerFont = "";
 var descFont = "";
 
-var seedNum = 0;
 var shapeCap = "";
-
-var noOfShapes = 30;
-var shapeWidth = 0;
-var shapeHeight = 0;
+var noOfShapesX = 0;
+var noOfShapesY = 0;
+var shapeSize = 50;
 
 function preload() {
   // Loading the desired fonts for the project
@@ -36,44 +34,68 @@ function preload() {
 function setup() {
   // Creates the canvas for the animation to be displayed on
   var canvas = createCanvas(windowWidth, windowHeight);
-  shapeWidth = width / noOfShapes;
-  shapeHeight = height / noOfShapes;
 
+  /*
+   The number of shapes in the x and y direction of the canvas is calculated
+   based off the desired shape size that is declared above. The number is floored
+   to have an even number of shapes that are to be drawn
+  */
+  noOfShapesY = floor(height / shapeSize);
+  noOfShapesX = floor(width / shapeSize);
+
+  /*
+  The offset is used to to recentre the canvas based off the remaining pixels that
+  were not used for creating shapes
+  */
+  yOffset = (height - (noOfShapesY * shapeSize)) / 2;
+  xOffset = (width - (noOfShapesX * shapeSize)) / 2;
+
+  // Changes the capping of strokes
   shapeCap = ROUND;
 
   // Setting the colour mode of the canvas
   // Using the 'rectMode' function to draw rectangles from the center
   colorMode(HSB, 360, 100, 100);
   rectMode(CENTER);
-  ellipseMode(CORNER);
+  noStroke();
 }
 
 // The 'draw' function is called in a loop. Everything that is in the function is executed continuously
 function draw() {
   // Time passed will hold the amount of time passed in seconds
   timePassed = millis() / 1000;
-
-  randomSeed(seedNum);
-
   background(0, 0, 100);
-  for (var y = 0; y <= noOfShapes; y++) {
-    for (var x = 0; x <= noOfShapes; x++) {
-      var rand = Math.floor(random(0, 2));
+
+  // Recentring the canvas using the offset values
+  translate(xOffset, yOffset);
+
+  // Nested loop to position the shapes in the x y direction
+  for (var posY = 0; posY < noOfShapesY; posY++) {
+    for (var posX = 0; posX < noOfShapesX; posX++) {
       push();
-      translate(x * shapeWidth, y * shapeHeight);
-      var angle = atan2(mouseY - (y * shapeHeight), mouseX - (x * shapeWidth));
-      rotate(angle);
-      fill('#000000');
-      strokeWeight(10);
+      // Calculating the center point for each shape in their respective grid
+      var centerX = (posX * shapeSize) + shapeSize / 2;
+      var centerY = (posY * shapeSize) + shapeSize / 2;
+      translate(centerX, centerY);
+      // Using the atan2 function to rotate the shape to the position of the mouse
+      var rotateShape = atan2(mouseY - centerY, mouseX - centerX);
+      /*
+      Using pythagoras theorem to calculate the distance between the mouse and
+      the shape. This value will be mapped to output a new value that will be used
+      to change the colour of the shape. The colour of the shape will change based
+      on it's distance to the mouse
+      */
+      var distance = sqrt(pow((mouseY - centerY), 2) + pow((mouseX - centerX), 2));
+      var disMap = map(distance, 0, 1000, 100, 200);
+      rotate(rotateShape);
+      strokeWeight(5);
       strokeCap(shapeCap);
-      stroke('#000000')
-      if (rand === 0) {
-        strokeWeight(map(constrain(mouseX, 0, width), 0, width, 1, 10));
-        line(-shapeWidth / 2, shapeHeight / 2, shapeWidth / 2, -shapeHeight / 2);
-      } else {
-        strokeWeight(map(constrain(mouseY, 0, height), 0, height, 1, 10));
-        line(-shapeWidth / 2, -shapeHeight / 2, shapeWidth / 2, shapeHeight / 2);
-      }
+      stroke(disMap, 70, 98)
+      line(0, 0, shapeSize / 2, shapeSize / 2);
+      translate(shapeSize / 2, shapeSize / 2);
+      noStroke();
+      fill(disMap, 70, 98)
+      triangle(-10, 0, 0, -10, 10, 10);
       pop();
     }
   }
@@ -112,10 +134,6 @@ function draw() {
     fill(0, 0, 0);
     text("04_nested_movement", 25, 30);
   }
-}
-
-function mousePressed() {
-  seedNum = Math.floor(random(100));
 }
 
 // Using the built-in function 'keyPressed' to check whether the user presses a key

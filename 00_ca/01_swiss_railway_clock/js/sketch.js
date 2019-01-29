@@ -19,13 +19,13 @@ var textAlpha = 1;
 var headerFont = "";
 var descFont = "";
 
-var shapeSize = 50;
-var noOfShapesX = 0;
-var noOfShapesY = 0;
-
-var yOffset = 0;
-var xOffset = 0;
-var seedNum = 0;;
+// Radius of clock, no of ticks, variables for tick height and width
+var radius = 0;
+const noOfTicks = 60;
+var hourTickHeight = 60;
+var hourTickWidth = hourTickHeight / 3;
+var minTickHeight = hourTickHeight / 3;
+var minTickWidth = minTickHeight / 3;
 
 function preload() {
   // Loading the desired fonts for the project
@@ -37,69 +37,99 @@ function preload() {
 function setup() {
   // Creates the canvas for the animation to be displayed on
   var canvas = createCanvas(windowWidth, windowHeight);
+  rectMode(CENTER);
 
-  /*
-   The number of shapes in the x and y direction of the canvas is calculated
-   based off the desired shape size that is declared above. The number is floored
-   to have an even number of shapes that are to be drawn
-  */
-  noOfShapesY = floor(height / shapeSize);
-  noOfShapesX = floor(width / shapeSize);
-
-  /*
-  The offset is used to to recentre the canvas based off the remaining pixels that
-  were not used for creating shapes
-  */
-  yOffset = (height - (noOfShapesY * shapeSize)) / 2;
-  xOffset = (width - (noOfShapesX * shapeSize)) / 2;
-
-  // Changes the capping of strokes
-  shapeCap = ROUND;
+  // Radius is half the height of the canvas
+  radius = height / 3;
 
   // Setting the colour mode of the canvas
   // Using the 'rectMode' function to draw rectangles from the center
   colorMode(HSB, 360, 100, 100);
-  rectMode(CENTER);
   noStroke();
 }
 
 // The 'draw' function is called in a loop. Everything that is in the function is executed continuously
 function draw() {
   // Time passed will hold the amount of time passed in seconds
+  // New date object for keeping track of time
   timePassed = millis() / 1000;
+  var time = new Date();
   background(0, 0, 100);
-  randomSeed(seedNum);
 
-  // Recentring the canvas using the offset values
-  translate(xOffset, yOffset);
+  // Outer shape of the clock
+  push();
+  translate(width / 2, height / 2);
+  noFill();
+  strokeWeight(10);
+  stroke(0);
+  ellipse(0, 0, radius * 2 + 50);
+  pop();
 
-  // Nested loop to position the shapes in the x y direction
-  for (var posY = 0; posY < noOfShapesY; posY++) {
-    for (var posX = 0; posX < noOfShapesX; posX++) {
-      let rand = floor(random(0, 2));
-      push();
-      // Each shape is translated to the centre of their grid
-      translate((posX * shapeSize) + shapeSize / 2, (posY * shapeSize) + shapeSize / 2)
-      fill(195, 70, 980);
-      strokeWeight(10);
-      strokeCap(shapeCap);
-      stroke(195, 70, 980)
+  // Loop for displaying each of the ticks
+  for (var i = 0; i <= noOfTicks; i++) {
+    push();
+    rectMode(CORNER);
+    var angle = 360 / noOfTicks * i;
+    translate(width / 2, height / 2);
+    rotate(radians(angle));
 
-      /*
-      Depending on the outcome of the random number, the line will be drawn
-      at a different angle
-      */
-      if (rand === 0) {
-        stroke(223, 56, 40)
-        strokeWeight(map(constrain(mouseX, 0, width), 0, width, 1, 10));
-        line(-shapeSize / 2, shapeSize / 2, shapeSize / 2, -shapeSize / 2);
-      } else {
-        strokeWeight(map(constrain(mouseY, 0, height), 0, height, 1, 10));
-        line(-shapeSize / 2, -shapeSize / 2, shapeSize / 2, shapeSize / 2);
-      }
-      pop();
+    // Makes every fifth tick an hour tick
+    if (i % 5 == 0) {
+      fill(0, 0, 0);
+      rect(-hourTickWidth / 2, -radius, hourTickWidth, hourTickHeight);
+    } else {
+      fill(0, 0, 0);
+      rect(-minTickWidth / 2, -radius, minTickWidth, minTickHeight);
     }
+    pop();
   }
+
+  // Hour hand using beginShape to create a tapered shape
+  push();
+  rectMode(CORNER);
+  translate(width / 2, height / 2);
+  fill(0, 0, 0);
+  rotate(radians(map((time.getHours() + time.getMinutes() / 60), 0, 24, 0, 720)));
+  //rect(-15, 100, 30, -radius + 50);
+  beginShape();
+  vertex(-10, 100);
+  vertex(-7, -radius);
+  vertex(7, -radius);
+  vertex(10, 100);
+  endShape(CLOSE);
+  pop();
+
+  // Minute hand using beginShape to create a tapered shape
+  push();
+  rectMode(CORNER);
+  translate(width / 2, height / 2);
+  fill(0, 0, 0);
+  rotate(radians(map((time.getMinutes() + time.getSeconds() / 60), 0, 60, 0, 360)));
+  //rect(-10, 100, 20, -radius - 100);
+  beginShape();
+  vertex(-15, 100);
+  vertex(-12, -radius + 150);
+  vertex(12, -radius + 150);
+  vertex(15, 100);
+  endShape(CLOSE);
+  pop();
+
+  // Second hand using beginShape to create a tapered shape
+  push();
+  rectMode(CORNER);
+  translate(width / 2, height / 2);
+  fill(3, 80, 100);
+  rotate(radians(map((time.getSeconds() + time.getMilliseconds() / 1000), 0, 60, 0, 360)));
+  //rect(-5, 100, 10, -radius);
+  beginShape();
+  vertex(-5, 100);
+  vertex(-3, -radius + 100);
+  vertex(3, -radius + 100);
+  vertex(5, 100);
+  endShape(CLOSE);
+  ellipse(0, 100 - radius, 40);
+  ellipse(0, 0, 20);
+  pop();
 
   //---------------------------------------------------------
   // ---------- FUNCTION FOR DISPLAYING INTRO TEXT ----------
@@ -109,16 +139,19 @@ function draw() {
     textSize(60);
     textFont(headerFont);
     textAlign(CENTER);
+    fill(0, 0, 100, textAlpha);
+    rect(width / 2, height / 2, radius * 2 + 65, radius * 2 + 65);
     fill(0, 0, 0, textAlpha);
     text("Generative Design: Shape", width / 2, height / 2.1);
 
     // The rectangle below will act as a divider between the two text fields
+    noStroke();
     rect(width / 2, height / 2, dividerWidth, 3);
 
     // Changing the font size, type for the font below
     textSize(40);
     textFont(descFont);
-    text("Nested Patterns", width / 2, height / 1.8);
+    text("Swiss Railway Clock", width / 2, height / 1.8);
 
     // The condition below checks to see if the desired display time for the text
     // has been reached and if the size of the divider has reached it's size
@@ -133,19 +166,12 @@ function draw() {
     textFont(headerFont);
     textAlign(LEFT);
     fill(0, 0, 0);
-    text("03_nested_patterns", 25, 30);
+    text("swiss_railway_clock", 25, 30);
   }
-}
-
-function mousePressed() {
-  seedNum = Math.floor(random(100));
 }
 
 // Using the built-in function 'keyPressed' to check whether the user presses a key
 // If the user presses the 's' key, the script will export an image of the canvas
 function keyPressed() {
-  if (key == "s" || key == "S") saveCanvas(canvas, "03_nested_patterns", "png");
-  if (key == 1) shapeCap = ROUND;
-  if (key == 2) shapeCap = SQUARE;
-  if (key == 3) shapeCap = PROJECT;
+  if (key == "s" || key == "S") saveCanvas(canvas, "swiss_railway_clock", "png");
 }

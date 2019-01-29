@@ -42,6 +42,7 @@ function setup() {
   // Using the 'rectMode' function to draw rectangles from the center
   colorMode(HSB, 360, 100, 100);
   rectMode(CENTER);
+  noStroke();
 }
 
 // The 'draw' function is called in a loop. Everything that is in the function is executed continuously
@@ -55,20 +56,32 @@ function draw() {
   // Calculating the number of segments to be drawn based on the position off the mouse in the 'y' direction
   // Calculating the radius based off the position of the mouse in the 'x' direction
   // Using the 'abs()' to convert the result for the radius into a whole number
-  segments = floor(map(constrain(mouseY, 0, height), 0, height, 10, 100));
+  segments = floor(map(constrain(mouseY, 0, height), 0, height, 50, 100));
   lineWidth = floor(map(constrain(mouseY, 0, height), 0, height, 5, 1));
-  radius = floor(map(constrain(mouseX, 0, width), 0, width, 50, 500));
+  radius = floor(map(constrain(mouseX, 0, width), 0, width, 500, 50));
   angleIncrement = (360 / segments);
 
   for (var angle = 0; angle <= 360; angle += angleIncrement) {
     push();
 
-    var posX = cos(radians(angle)) * abs(radius);
-    var posY = sin(radians(angle)) * abs(radius);
+    //var posX = cos(radians(angle)) * abs(radius);
+    //var posY = sin(radians(angle)) * abs(radius);
+    //var posX = cos(radians(angle)) * (sin((angle/90)*TWO_PI) * radius);
+    //var posY = sin(radians(angle)) * (sin((angle/90)*TWO_PI) * radius);
+
+    /*
+    The first part of the calculation determines the x and y location
+    The second part uses the map function to determine the radius based on the returned
+    value from the sin(angle / 45 * TWO_PI)
+    */
+    var posX = cos(radians(angle)) * map(sin((angle / 45) * TWO_PI), -1, 1, radius / 2, radius);
+    var posY = sin(radians(angle)) * map(sin((angle / 45) * TWO_PI), -1, 1, radius / 2, radius);
+
     translate(width / 2, height / 2);
     strokeWeight(lineWidth);
-    fill(0, 0, 0);
-    line(0, 0, posX, posY);
+    stroke(195, 70, 98);
+    fill(195, 70, 98);
+    line(posX / 2, posY / 2, posX, posY);
     ellipse(posX, posY, 10, 10);
     pop();
   }

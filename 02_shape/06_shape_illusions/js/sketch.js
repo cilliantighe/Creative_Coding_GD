@@ -19,13 +19,14 @@ var textAlpha = 1;
 var headerFont = "";
 var descFont = "";
 
-var shapeSize = 50;
+var shape = "Circle"
+var shapeSize = 100;
 var noOfShapesX = 0;
 var noOfShapesY = 0;
 
 var yOffset = 0;
 var xOffset = 0;
-var seedNum = 0;;
+var seedNum = 0;
 
 function preload() {
   // Loading the desired fonts for the project
@@ -53,9 +54,6 @@ function setup() {
   yOffset = (height - (noOfShapesY * shapeSize)) / 2;
   xOffset = (width - (noOfShapesX * shapeSize)) / 2;
 
-  // Changes the capping of strokes
-  shapeCap = ROUND;
-
   // Setting the colour mode of the canvas
   // Using the 'rectMode' function to draw rectangles from the center
   colorMode(HSB, 360, 100, 100);
@@ -76,30 +74,40 @@ function draw() {
   // Nested loop to position the shapes in the x y direction
   for (var posY = 0; posY < noOfShapesY; posY++) {
     for (var posX = 0; posX < noOfShapesX; posX++) {
-      let rand = floor(random(0, 2));
       push();
       // Each shape is translated to the centre of their grid
       translate((posX * shapeSize) + shapeSize / 2, (posY * shapeSize) + shapeSize / 2)
-      fill(195, 70, 980);
-      strokeWeight(10);
-      strokeCap(shapeCap);
-      stroke(195, 70, 980)
+      var shiftX = random(-mouseX, mouseX) / 20;
+      var shiftY = random(-mouseY, mouseY) / 20;
 
-      /*
-      Depending on the outcome of the random number, the line will be drawn
-      at a different angle
-      */
-      if (rand === 0) {
-        stroke(223, 56, 40)
-        strokeWeight(map(constrain(mouseX, 0, width), 0, width, 1, 10));
-        line(-shapeSize / 2, shapeSize / 2, shapeSize / 2, -shapeSize / 2);
-      } else {
-        strokeWeight(map(constrain(mouseY, 0, height), 0, height, 1, 10));
-        line(-shapeSize / 2, -shapeSize / 2, shapeSize / 2, shapeSize / 2);
+      // Displaying the shape based on the user input
+      if (shape == "Circle") {
+        noStroke();
+        fill(195, 70, 98);
+        ellipse(shiftX, shiftY, shapeSize);
+        noStroke();
+        fill(0, 0, 100);
+        ellipse(0, 0, shapeSize / 2);
+      } else if (shape == "Rectangle") {
+        noStroke();
+        fill(195, 70, 98);
+        rect(shiftX, shiftY, shapeSize, shapeSize);
+        noStroke();
+        fill(0, 0, 100);
+        rect(0, 0, shapeSize / 2, shapeSize / 2);
+      } else if (shape == "Triangle") {
+        noStroke();
+        fill(195, 70, 98);
+        triangle(shiftX - shapeSize / 2, shiftY + shapeSize / 2, shiftX, shiftY - shapeSize / 4, shiftX + shapeSize / 2, shiftY + shapeSize / 2);
+        noStroke();
+        fill(0, 0, 100);
+        triangle(-shapeSize / 4, shapeSize / 2.5, 0, 0, shapeSize / 4, shapeSize / 2.5);
       }
       pop();
     }
   }
+
+
 
   //---------------------------------------------------------
   // ---------- FUNCTION FOR DISPLAYING INTRO TEXT ----------
@@ -118,7 +126,7 @@ function draw() {
     // Changing the font size, type for the font below
     textSize(40);
     textFont(descFont);
-    text("Nested Patterns", width / 2, height / 1.8);
+    text("Shape Illusions", width / 2, height / 1.8);
 
     // The condition below checks to see if the desired display time for the text
     // has been reached and if the size of the divider has reached it's size
@@ -133,19 +141,19 @@ function draw() {
     textFont(headerFont);
     textAlign(LEFT);
     fill(0, 0, 0);
-    text("03_nested_patterns", 25, 30);
+    text("06_shape_illusions", 25, 30);
   }
 }
 
 function mousePressed() {
-  seedNum = Math.floor(random(100));
+  seedNum = random(1, 100);
 }
 
 // Using the built-in function 'keyPressed' to check whether the user presses a key
 // If the user presses the 's' key, the script will export an image of the canvas
 function keyPressed() {
-  if (key == "s" || key == "S") saveCanvas(canvas, "03_nested_patterns", "png");
-  if (key == 1) shapeCap = ROUND;
-  if (key == 2) shapeCap = SQUARE;
-  if (key == 3) shapeCap = PROJECT;
+  if (key == "s" || key == "S") saveCanvas(canvas, "06_shape_illusions", "png");
+  if (key == 1) shape = 'Circle';
+  if (key == 2) shape = 'Rectangle';
+  if (key == 3) shape = 'Triangle';
 }
