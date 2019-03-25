@@ -1,0 +1,67 @@
+<!--
+Creative Coding
+Author: Cillian Tighe
+Student No: N00152737
+P5
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Generative Design</title>
+
+  <!-- Link to 'CSS' and 'Font' files -->
+  <link href="https://jenil.github.io/bulmaswatch/materia/bulmaswatch.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed|Roboto:100" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <link href="slider.css" rel="stylesheet">
+
+  <!-- Link to 'JS' files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+</head>
+
+<body>
+  <!-- Control panel for the canvas -->
+  <!-- This is an absolute div -->
+  <aside id="controls" class="card controls">
+    <header id="controlsHeader" class="card-header">
+      <p class="card-header-title">Input Controls</p>
+      <a class="card-header-icon icon-reset">
+        <span class="icon">
+          <i class="fas fa-arrows-alt"></i>
+        </span>
+      </a>
+    </header>
+    <!-- Holds all the controls for the canvas -->
+    <div class="card-content">
+      <div class="field">
+        <label class="label">Text Size <span id="sizeValue" class="tag"></span></label>
+        <div id="sizeSlider" class="control">
+        </div>
+      </div>
+      <!-- Control for the image clarity -->
+      <div class="field">
+        <label class="label">Image Clarity <span id="clarityValue" class="tag"></span></label>
+        <div id="claritySlider" class="control">
+        </div>
+      </div>
+      <!-- Control for text input -->
+      <div class="field">
+        <label class="label">Input Text</label>
+        <div id="txtInput" class="control">
+        </div>
+      </div>
+    </div>
+  </aside>
+  <script src="sketch.js"></script>
+  <script src="movement.js"></script>
+</body>
+
+</html>

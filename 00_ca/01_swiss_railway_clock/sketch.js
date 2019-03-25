@@ -132,7 +132,7 @@ function draw() {
     fill(0, 0, 100, textAlpha);
     rect(width / 2, height / 2, radius * 2 + 65, radius * 2 + 65);
     fill(0, 0, 0, textAlpha);
-    text("Generative Design: Shape", width / 2, height / 2.1);
+    text("Generative Design: CA", width / 2, height / 2.1);
 
     // The rectangle below will act as a divider between the two text fields
     noStroke();

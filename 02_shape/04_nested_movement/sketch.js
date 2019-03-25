@@ -77,7 +77,7 @@ function draw() {
       */
       var distance = sqrt(pow((mouseY - centerY), 2) + pow((mouseX - centerX), 2));
       var disMap = map(distance, 0, width/2, 100, 200);
-      var sizeMap = map(distance, 0, width, 0, 10);
+      var sizeMap = map(distance, 0, width, 1, 10);
       var lenMap = map(distance, 0, width, 8, 2);
       rotate(rotateShape);
       strokeWeight(sizeMap);
