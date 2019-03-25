@@ -70,10 +70,10 @@ function draw() {
       push();
       // Each shape is translated to the centre of their grid
       translate((posX * shapeSize) + shapeSize / 2, (posY * shapeSize) + shapeSize / 2)
-      fill(195, 70, 980);
+      fill(195, 70, 98);
       strokeWeight(10);
       strokeCap(shapeCap);
-      stroke(195, 70, 980)
+      stroke(195, 70, 98)
 
       /*
       Depending on the outcome of the random number, the line will be drawn

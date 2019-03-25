@@ -41,7 +41,7 @@ function setup() {
   xOffset = (width - (noOfShapesX * shapeSize)) / 2;
 
   // Changes the capping of strokes
-  shapeCap = ROUND;
+  shapeCap = SQUARE;
 
   // Setting the colour mode of the canvas
   // Using the 'rectMode' function to draw rectangles from the center
@@ -76,14 +76,15 @@ function draw() {
       on it's distance to the mouse
       */
       var distance = sqrt(pow((mouseY - centerY), 2) + pow((mouseX - centerX), 2));
-      var disMap = map(distance, 0, 1000, 100, 200);
-      var sizeMap = map(distance, 0, 1000, 5, 10);
+      var disMap = map(distance, 0, width/2, 100, 200);
+      var sizeMap = map(distance, 0, width, 0, 10);
+      var lenMap = map(distance, 0, width, 8, 2);
       rotate(rotateShape);
       strokeWeight(sizeMap);
       strokeCap(shapeCap);
       stroke(disMap, 70, 98)
-      line(0, 0, shapeSize / 2, shapeSize / 2);
-      translate(shapeSize / 2, shapeSize / 2);
+      line(0, 0, shapeSize / lenMap, shapeSize / lenMap);
+      translate(shapeSize / lenMap, shapeSize / lenMap);
       noStroke();
       fill(disMap, 70, 98)
       triangle(-(sizeMap*2), 0, 0, -(sizeMap*2), abs(sizeMap), abs(sizeMap));
